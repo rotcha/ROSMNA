@@ -23,7 +23,6 @@ public class ListeChainee implements ListeChaineeInterface {
 			head = new Node(val1, temp);
 			size_ = 2;
 		}
-		// Test
 	}
 
 	@Override
