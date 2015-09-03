@@ -8,4 +8,5 @@ public interface ListeChaineeInterface {
 	public int getAt (int position);
 	public void reset();
 	public boolean isValid();
+	public void printAll();
 }
