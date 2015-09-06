@@ -1,0 +1,12 @@
+
+public class Main {
+
+	public static void main(String[] args) throws Exception {
+		
+		ListeChainee liste = new ListeChainee("allo", "substract", 1, 2,5, false);
+		liste.printAll();
+		System.out.println(liste.removeAt(3));
+		
+	}
+
+}
