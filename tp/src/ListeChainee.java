@@ -7,8 +7,14 @@ public class ListeChainee implements ListeChaineeInterface {
 	String op_;
 	
 	public ListeChainee(String path, String op, int val1, int val2, int size, boolean empty) throws Exception {
-		
-		if (size == 1)
+		if(size == 0)
+		{
+			sizeMax_ = size;
+			op_ = "";
+			head = null;
+			size_ = 0;
+		}
+		else if (size == 1)
 		{
 			sizeMax_ = size;
 			op_ = op;
@@ -104,59 +110,95 @@ public class ListeChainee implements ListeChaineeInterface {
 	@Override
 	public int removeAt(int position) throws Exception  {
 		// TODO Auto-generated method stub
-		if(position < 0 || position > sizeMax_)
+		//On vérifie que la position est un entier valide
+		if(position < 0 || position > size_)
 			throw new IndexOutOfBoundsException();
 		else{
 				int nbre = 0;
 				Node temp = head;
 				Node prev = head;
 				
+				//on parcourt la liste jusqu'à la position indiquée
 				while(nbre++ != position-1){
-					prev = temp;
+					prev = temp;    //designe le noeud predecesseur du noeud correspondant à la position
 					temp = temp.getNext();				
 				}
+				// le noeud suivant du predecesseur devient le noeud suivant de celui correspondant à la position
 				prev.setNext(temp.getNext());
-				sizeMax_--;
+				size_--;
 				return temp.getData();
 		}
 		
 	}
 
 	@Override
-	public boolean removeItem(int element) {
+	public void removeItem(int element) {
 		// TODO Auto-generated method stub
 		Node temp = head;
 		Node prev = head;
+		//on parcourt la liste jusqu'à l'élément
 		while(temp.getData() != element){
 			prev = temp;
 			temp = temp.getNext();
 			
 		}
+		// le noeud suivant du predecesseur devient le noeud suivant de celui correspondant à l'élément
 		if (temp.getData() == element){
+			
 			prev.setNext(temp.getNext());
-			sizeMax_--;
-			return true;
+			size_--;
+			//return true;
 		}
-		
-		return false;
+		/*else
+		return false;*/
 	}
 
 	@Override
-	public void setAt(int element, int position) {
+	public void setAt(int element, int position) throws Exception {
 		// TODO Auto-generated method stub
+		//On vérifie que la position est un entier valide
+		if(position < 0 || position > size_)
+			throw new IndexOutOfBoundsException();
+		else{
+				int nbre = 0;
+				Node temp = head;
+			//on parcourt la liste jusqu'à la position
+				while(nbre++ != position-1){
+					temp = temp.getNext();				
+				}
+				//et on modifie l'élement à cette position
+				temp.setData(element);
+		}
 		
 	}
 
 	@Override
 	public int getAt(int position) {
 		// TODO Auto-generated method stub
-		return 0;
+		//On vérifie que la position est un entier valide
+		if(position < 0 || position > size_)
+			throw new IndexOutOfBoundsException();
+		int nbre = 0;
+		Node temp = head;
+		//on parcourt la liste jusqu'à la position
+		while(nbre++ != position-1){
+			temp = temp.getNext();				
+		}
+		return temp.getData();
 	}
 
 	@Override
 	public void reset() {
 		// TODO Auto-generated method stub
 		
+		Node temp = head;
+		
+		while(temp.getNext() != null){
+			removeItem(temp.data_);
+			size_--;
+			
+		}
+					
 	}
 
 	@Override
